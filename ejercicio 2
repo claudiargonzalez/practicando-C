@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <string.h>
+
+void registrarEstudianteNota(char nombres[15][50], float notas[15], int contador);
+void buscarEstudianteNota(char nombres[15][50], float notas[15], int contador);
+void calcularPromedio(int totalEstudiantes[15], float notas[15], int contador);
+void mostrarEstudianteNota(char nombres[15][50], float notas[15], int contador);
+
+int main(){
+char nombres[15][50];
+float notas[15];
+int totalEstudiantes[15];
+int tam = 15;
+int opcion;
+
+    do
+    {
+    printf("\nControl de Notas de Estudiantes\n");
+    printf("1. Registrar Estudiante\n");
+    printf("2. Buscar Estudiante\n");
+    printf("3. Calcular el promedio de notas del curso\n");
+    printf("4. Mostrar la lista de todos los estudiantes con sus notas\n");
+    printf("5. Salir\n");
+    printf("Seleccione una opcion: ");
+    scanf("%i", &opcion);
+
+        switch (opcion)
+        {
+        case 1:
+
+        registrarEstudianteNota(nombres, notas, tam);
+
+        break;
+        case 2:
+
+        buscarEstudianteNota(nombres, notas, tam);
+
+        break;
+        case 3:
+
+        calcularPromedio(totalEstudiantes, notas, tam);
+
+
+        break;
+        case 4:
+
+        mostrarEstudianteNota(nombres, notas, tam);
+
+        break;
+        case 5:
+        printf("\nFinalizando programa...\n");
+        break;
+        default:
+        printf("\nOpcion invalida.\n");
+        }
+        } while (opcion != 5);
+
+        return 0;
+    }
+
+void registrarEstudianteNota(char nombres[15][50], float notas[15], int contador){
+int i;
+    for (i = 0; i <contador; i++){
+        printf("ingresar nombre del Estudiante %s\n", i + 1);
+        scanf("%s", nombres[i]);
+        printf("ingresar la nota del Estudiante %s\n", notas[i]);
+        scanf("%.2f", &notas[i]);
+    
+                
+    }
+}
+    
+void buscarEstudianteNota(char nombres[15][50], float notas[15], int contador){
+int encontrado=0;
+char buscado[50];
+
+printf("Buscando estudiantes y notas?\n");
+scanf("%s", buscado);
+
+    for(int i=0;i<contador;i++){
+        if (strcmp(nombres[i], buscado) == 0)
+        {
+            printf("Nombre del Estudiante: %s\n", nombres[i]);
+            printf("Nota: %.2f \n", notas[i]);
+            encontrado=1;
+            break;
+        }
+
+    }
+
+    if(!encontrado){
+        printf("El alumno no esta registrado.\n");
+    }
+
+
+}
+
+
+void calcularPromedio(int totalEstudiantes[15], float notas[15], int contador){
+
+    float total=0.0;
+    
+    for(int i=0; i<contador;i++){
+       total+=(totalEstudiantes[i]*notas[i])/totalEstudiantes[i]; 
+    //    total= total +(stock[i]*precios[i]);
+    }
+    printf("El total es: %.2f", total);
+    
+    }
+
+
+void mostrarEstudianteNota(char nombres[15][50], float notas[15], int contador){
+
+    for(int i=0;i<contador;i++){
+        printf("Nombre del Estudiante: %s\n", nombres[i]);
+        printf("Nota: %.2f \n", notas[i]);
+       
+    }
+
+}
