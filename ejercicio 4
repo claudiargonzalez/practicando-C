@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <string.h>
+
+void registrarProducto(char nombres[][50], int stock[], float precios[], int contador);
+void buscarProducto(char nombres[][50], int stock[], float precios[], int contador);
+void calcularValorTotal(int stock[10], float precios[], int contador);
+void mostrarProductos(char nombres[10][50], int stock[], float precios[], int contador);
+
+int main(){
+char nombres[10][50];
+int stock[10];
+float precios[10];
+int tam = 3;
+int opcion;
+
+    do
+    {
+    printf("\nSistema de Gestion de Inventario\n");
+    printf("1. Registrar Productos\n");
+    printf("2. Buscar Producto\n");
+    printf("3. Calcular Valor Total del Inventario\n");
+    printf("4. Mostrar Todos los Productos\n");
+    printf("5. Salir\n");
+    printf("Seleccione una opcion: ");
+    scanf("%i", &opcion);
+
+        switch (opcion)
+        {
+        case 1:
+
+        registrarProducto(nombres, stock, precios, tam);
+
+        break;
+        case 2:
+
+        buscarProducto(nombres, stock, precios, tam);
+
+        break;
+        case 3:
+
+        calcularValorTotal(stock, precios, tam);
+
+
+        break;
+        case 4:
+
+        mostrarProductos(nombres, stock, precios, tam);
+
+        break;
+        case 5:
+        printf("\nFinalizando programa...\n");
+        break;
+        default:
+        printf("\nOpcion invalida.\n");
+        }
+        } while (opcion != 5);
+
+        return 0;
+    }
+
+void registrarProducto(char nombres[][50], int stock[], float precios[10], int contador){
+int i;
+    for (i = 0; i <contador; i++){
+        printf("ingresar nombre del producto %i\n", i + 1);
+        scanf("%s", nombres[i]);
+
+        do{
+        printf("ingresar la cantidad en stock del producto %s\n", nombres[i]);
+        scanf("%i", &stock[i]);
+        }while(stock[i]<0);
+
+        do{
+        printf("ingresar precio unitario del producto %s\n", nombres[i]);
+        scanf("%f", &precios[i]);
+        }while(precios[i]<0);
+
+    }
+
+}
+
+void buscarProducto(char nombres[][50], int stock[], float precios[], int contador){
+int encontrado=0;
+char buscado[50];
+
+printf("Que producto buscas?\n");
+scanf("%s", buscado);
+
+    for(int i=0;i<contador;i++){
+        if (strcmp(nombres[i], buscado) == 0) // compara cadenas de caracteres
+        {
+            printf("Nombre del producto: %s\n", nombres[i]);
+            printf("Stock: %i \n", stock[i]);
+            printf("Precio: %.2f\n", precios[i]);
+            encontrado=1;
+            break;
+        }
+
+    }
+
+    if(!encontrado){
+        printf("El producto no esta registrado.\n");
+    }
+
+
+}
+
+void calcularValorTotal(int stock[10], float precios[], int contador){
+float total=0.0;
+
+for(int i=0; i<contador;i++){
+   total+=stock[i]*precios[i]; 
+//    total= total +(stock[i]*precios[i]);
+}
+printf("El total es: %.2f", total);
+
+}
+
+void mostrarProductos(char nombres[10][50], int stock[], float precios[], int contador){
+
+    for(int i=0;i<contador;i++){
+        printf("Nombre del producto: %s\n", nombres[i]);
+        printf("Stock: %i \n", stock[i]);
+        printf("Precio: %.2f\n", precios[i]);
+    }
+
+}
