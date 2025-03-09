@@ -1,0 +1,90 @@
+Proceso GestionDeInventario
+    Dimension nombres[10]
+    Dimension stock[10]
+    Dimension precios[10]
+    tam <- 3
+    opcion_ <- 0
+	
+    Mientras opcion_ <> 5 Hacer
+        Escribir "Sistema de Gestion de Inventario"
+        Escribir "1. Registrar Productos"
+        Escribir "2. Buscar Producto"
+        Escribir "3. Calcular Valor Total del Inventario"
+        Escribir "4. Mostrar Todos los Productos"
+        Escribir "5. Salir"
+        Escribir "Seleccione una opcion: "
+        Leer opcion_
+		
+        Segun opcion_ Hacer
+            Caso 1:
+                registrarProducto(nombres, stock, precios, tam)
+            Caso 2:
+                buscarProducto(nombres, stock, precios, tam)
+            Caso 3:
+                calcularValorTotal(stock, precios, tam)
+            Caso 4:
+                mostrarProductos(nombres, stock, precios, tam)
+            Caso 5:
+                Escribir "Finalizando programa..."
+            De Otro Modo:
+                Escribir "Opcion invalida."
+        Fin Segun
+    Fin Mientras
+FinProceso
+
+SubProceso registrarProducto(nombres, stock, precios, contador)
+    Para i <- 1 Hasta contador Hacer
+        Escribir "Ingrese nombre del producto ", i, ": "
+        Leer nombres[i]
+        Escribir "Ingrese la cantidad en stock del producto ", nombres[i], ": "
+			Repetir 
+				Leer stock[i] 
+			Hasta Que stock[i] > 0
+            
+			Si  stock[i] < 0 Entonces
+                Escribir "El stock no puede ser negativo. Intente de nuevo."
+            Fin Si
+			
+			Escribir "Ingrese precio unitario del producto ", nombres[i], ": "
+			Repetir 
+				Leer precios[i] 
+			Hasta Que precios[i] > 0
+			
+			Si precios[i] < 0 Entonces
+				Escribir "El precio no puede ser negativo. Intente de nuevo."
+			Fin Si
+	FinPara
+FinSubProceso
+
+SubProceso buscarProducto(nombres, stock, precios, contador)
+    encontrado <- 0 // variable bandera
+    Escribir "Que producto busca?"
+    Leer buscado
+    Para i <- 1 Hasta contador Hacer
+        Si nombres[i] = buscado Entonces
+            Escribir "Nombre del producto: ", nombres[i]
+            Escribir "Stock: ", stock[i]
+            Escribir "Precio: ", precios[i]
+            encontrado <- 1
+		Fin Si
+    Fin Para
+    Si encontrado = 0 Entonces
+        Escribir "El producto no esta registrado."
+    Fin Si
+FinSubProceso
+
+SubProceso calcularValorTotal(stock, precios, contador)
+    total <- 0
+	Para i <- 1 Hasta contador Hacer
+        total <- total + (stock[i] * precios[i])
+    Fin Para
+	Escribir "El valor total del inventario es: ", total
+FinSubProceso
+
+SubProceso mostrarProductos(nombres, stock, precios, contador)
+    Para i <- 1 Hasta contador Hacer
+        Escribir "Nombre del producto: ", nombres[i]
+        Escribir "Stock: ", stock[i]
+        Escribir "Precio: ", precios[i]
+    Fin Para
+FinSubProceso
