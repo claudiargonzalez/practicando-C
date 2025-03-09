@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <string.h>
+
+void registrarTurno(char nombres[10][50], char especialidades[10][50], char fechas [10][12], int contador);
+void buscarTurno(char nombres[10][50], char especialidades[10][50], char fechas [10][12], int contador);
+void mostrarTurno(char nombres[10][50], char especialidades[10][50], char fechas [10][12], int contador);
+
+int main(){
+    char nombres[10][50];
+    char especialidades[10][50];
+    char fechas [10][12];
+    int tam = 10;
+    int opcion;
+
+    do
+    {
+    printf("\nSistema de Gestion de Turnos\n");
+    printf("1. Registrar Turnos\n");
+    printf("2. Buscar Turno\n");
+    printf("3. Listar todos los turnos registrados\n");
+    printf("4. Salir del programa.\n");    
+    printf("Seleccione una opcion: ");
+    scanf("%i", &opcion);
+
+        switch (opcion)
+        {
+        case 1:
+
+        registrarTurno(nombres, especialidades, fechas, tam);
+
+        break;
+        case 2:
+
+        buscarTurno(nombres, especialidades, fechas, tam);
+
+        break;
+        case 3:
+
+        mostrarTurno(nombres, especialidades, fechas, tam);
+
+
+        break;
+        case 4:
+        printf("\nFinalizando programa...\n");
+        break;
+        default:
+        printf("\nOpcion invalida.\n");
+        }
+        } while (opcion != 4);
+
+        return 0;
+    }
+
+    void registrarTurno(char nombres[10][50], char especialidades[10][50], char fechas [10][12], int contador){
+        int i;
+                for (i = 0; i <contador; i++){
+                    printf("ingresar nombre del paciente %s\n", i + 1);
+                    scanf("%s", nombres[i]);
+                    printf("ingresar la especialidad %s\n", especialidades[i]);
+                    scanf("%s", &especialidades[i]);
+                    printf("ingresar fecha del turno (DD/MM/AAAA) %s\n", fechas[i]);
+                    scanf("%s", &fechas[i]);
+                    
+                }
+
+    }
+    
+    void buscarTurno(char nombres[10][50], char especialidades[10][50], char fechas [10][12], int contador){
+        int encontrado=0;
+        char buscado[50];
+        
+        printf("Turno registrado:\n");
+        scanf("%s", buscado);
+        
+            for(int i=0;i<contador;i++){
+                if (strcmp(nombres[i], buscado) == 0)
+                {
+                    printf("Nombre del paciente: %s\n", nombres[i]);
+                    printf("Especialidad: %s \n", especialidades[i]);
+                    printf("Fecha: %s\n", fechas[i]);
+                    encontrado=1;
+                    break;
+                }
+        
+            }
+        
+            if(!encontrado){
+                printf("El turno no esta registrado.\n");
+            }
+        
+        
+        }
+
+        void mostrarTurno(char nombres[10][50], char especialidades[10][50], char fechas [10][12], int contador){
+
+            for(int i=0;i<contador;i++){
+                printf("Nombre del paciente: %s\n", nombres[i]);
+                printf("Especialidad: %s \n", especialidades[i]);
+                printf("Fecha: %s\n", fechas[i]);
+            }
+        
+        }
