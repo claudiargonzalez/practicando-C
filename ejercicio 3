@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <string.h>
+
+void registrarLibro (char titulos[20][50], char autores[20][50], int disponible [20], int contador[]);
+void buscarLibro (char titulos[20][50], char autores[20][50], int disponible [20], int contador[]);
+void mostrarLibro (char titulos[20][50], char autores[20][50], int disponible [20], int contador[]);
+void cambiarEstadoLibro (char titulos[20][50], char autores[20][50], int disponible [20], int contador[]);
+
+int main(){
+char titulos;
+char autores;
+int disponible;
+int tam = 20;
+int opcion;
+
+do
+{
+    printf("\n Administración de Prestamos de Libros\n");
+    printf("1. Registrar Libro:\n");
+    printf("2. Buscar Libro:\n");
+    printf("3. Mostrar Libro:\n");
+    printf("4. Cambiar Estado de Libro:\n");
+    printf("5. Salir");
+    printf("Elegir una opcion:");
+    scanf("%i", &opcion);
+
+        switch (opcion)
+         {
+            case 1:  
+        
+            registrarLibro(titulos, autores, disponible, tam);
+            break;
+
+            case 2:  
+        
+            BuscarLibro(titulos, autores, disponible, tam);
+            break;
+
+            case 3:   
+        
+            MostrarLibro(titulos, autores, disponible, tam);
+            break;
+
+            case 4:  
+        
+            cambiarEstadoLibro(titulos, autores, disponible, tam);
+            break;
+
+            case 5:  
+        
+            printf("\nFinalizando el programa\n");
+            break;
+    
+            default:
+            printf("\nOpcion Invalida\n");
+            break;
+         }
+
+} while (opcion !=5);
+
+return 0;
+
+}
+
+void registrarLibro (char titulos[20][50], char autores[20][50], int disponible [20], int contador[]){
+    int i;
+    int registrarNuevo;
+
+        for (i = 0; i <contador; i++){
+            printf("Ingresar Nombre del Libro %s\n", i + 1);
+            scanf("%s", titulos[i]);
+    
+            do{
+            printf("Ingresar Nombre del Autor %s\n", autores[i]);
+            scanf("%s", &autores[i]);
+            }while(autores[i]<0);
+    
+            do{
+            printf("Ingresar Disponibilidad (0:Prestado / 1:Disponible) %i\n", disponible[i]);
+            scanf("%i", &disponible[i]);
+            }while(disponible[i]<0);
+
+            do{
+                printf("Quiere registrar otro libro? (0:No / 1:Si) %i\n", registrarNuevo);
+                scanf("%i", &registrarNuevo);
+                if(registrarNuevo = 1){
+                    printf("Cargando Libro\n");
+                }else if(registrarNuevo = 0){
+                    printf("Operacion Finalizada\n");
+                    break;
+                } else {
+                printf("Opcion Invalida, por favor ingrese 0 o 1\n"); 
+                }   
+            }while(registrarNuevo != 0);
+           
+        }
+    }
+    
+
+void buscarLibro(char titulos[20][50], char autores[20][50], int disponible [20], int contador[]){
+    int encontrado=0;
+    char buscado[50];
+    
+    printf("Buscando Libro:\n");
+    scanf("%s", buscado);
+    
+        for(int i=0;i<contador;i++){
+            if (strcmp(titulos[i], buscado) == 0)
+            {
+                printf("Nombre del libro: %s\n", titulos[i]);
+                printf("Autor: %s \n", autores[i]);
+                printf("Disponibilidad: %s\n", disponible[i]);
+                encontrado=1;
+                break;
+            }
+    
+        }
+    }
+
+    void mostrarLibro(char titulos[20][50], char autores[20][50], int disponible [20], int contador[]){
+
+        for(int i=0;i<contador;i++){
+            printf("Nombre del Libro: %s\n", titulos[i]);
+            printf("Autor: %s \n", autores[i]);
+            printf("Disponibilidad: %i\n", disponible[i]);
+        }
+    
+    }
+
+    void cambiarEstadoLibro (char titulos[20][50], char autores[20][50], int disponible [20], int contador[]){
+        int encontrado=0;
+        char buscado[50];
+        
+        printf("Buscando Libro:\n");
+        scanf("%s", buscado);
+        
+            for(int i=0;i<contador;i++){
+                if (strcmp(titulos[i], buscado) == 0)
+                {
+                    printf("Nombre del libro: %s\n", titulos[i]);
+                    printf("Autor: %s \n", autores[i]);
+                    printf("Disponibilidad: %i\n", disponible[i]);
+                    encontrado=1;
+                    if(disponible[i]==0){ // cuando compara doble signo =
+                      (disponible[i]=1);  // para asignar valor  al a variable es un solo signo =
+                    }else(disponible[i]=0);
+                    break;
+                }
+        
+            }
+
+
+    }    
